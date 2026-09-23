@@ -23,7 +23,6 @@
     padding-top: 70px;
   }
 
-  /* HEADER FIJO */
   .header {
     position: fixed;
     top: 0;
@@ -73,7 +72,6 @@
     padding: 4px 8px;
   }
 
-  /* MENÚ LATERAL */
   .menu-overlay {
     display: none;
     position: fixed;
@@ -143,14 +141,12 @@
   .menu-panel ul li:hover { color: var(--dorado); padding-left: 8px; }
   .menu-panel ul li i { width: 24px; color: var(--dorado); }
 
-  /* CONTENEDOR */
   .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px 16px 40px;
   }
 
-  /* PORTADA */
   .portada {
     width: 100%;
     border-radius: 20px;
@@ -164,7 +160,6 @@
     display: block;
   }
 
-  /* TÍTULO */
   .titulo-principal {
     text-align: center;
     margin-bottom: 28px;
@@ -190,7 +185,6 @@
     margin-top: 4px;
   }
 
-  /* BOTONES PRINCIPALES */
   .acciones-principales {
     display: flex;
     flex-wrap: wrap;
@@ -220,7 +214,6 @@
   .btn-share { background: var(--dorado); color: var(--azul-oscuro); }
   .btn-qr { background: var(--azul-claro); color: white; }
 
-  /* CARRUSEL */
   .seccion-titulo {
     text-align: center;
     font-size: 1.6rem;
@@ -294,7 +287,6 @@
   }
   .indicator.active { background: var(--dorado); width: 20px; border-radius: 10px; }
 
-  /* CATÁLOGO */
   .catalogo-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -331,7 +323,6 @@
     letter-spacing: 0.5px;
   }
 
-  /* QR */
   .qr-seccion {
     text-align: center;
     background: rgba(255,255,255,0.05);
@@ -359,7 +350,6 @@
     margin-top: 10px;
   }
 
-  /* MODAL QR */
   .modal-qr {
     display: none;
     position: fixed;
@@ -408,7 +398,6 @@
     font-size: 12px;
   }
 
-  /* FOOTER */
   .footer {
     text-align: center;
     padding: 24px 16px;
@@ -434,7 +423,6 @@
   }
   .footer .creditos i { color: var(--dorado); }
 
-  /* RESPONSIVE */
   @media (min-width: 600px) {
     .catalogo-grid { grid-template-columns: repeat(3, 1fr); }
     .titulo-principal h1 { font-size: 2.5rem; }
@@ -446,7 +434,6 @@
 </head>
 <body>
 
-<!-- HEADER FIJO -->
 <header class="header">
   <div class="logo-header">
     <img src="logo-style.png" alt="STYLE COLLECTION">
@@ -458,7 +445,6 @@
   <button class="menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
 </header>
 
-<!-- MENÚ LATERAL -->
 <div class="menu-overlay" id="menuOverlay"></div>
 <div class="menu-panel" id="menuPanel">
   <button class="close-btn" id="menuClose"><i class="fas fa-times"></i></button>
@@ -477,22 +463,18 @@
   </ul>
 </div>
 
-<!-- CONTENIDO -->
 <div class="container" id="inicio">
 
-  <!-- PORTADA -->
   <div class="portada">
     <img src="portada-style.jpg" alt="STYLE COLLECTION">
   </div>
 
-  <!-- TÍTULO -->
   <div class="titulo-principal">
     <h1>STYLE <span>COLLECTION</span></h1>
     <div class="distribuidor">Julio Vargas · Distribuidor Independiente</div>
     <div class="slogan">¡Que nada apague tu luz!</div>
   </div>
 
-  <!-- BOTONES PRINCIPALES -->
   <div class="acciones-principales">
     <a href="https://wa.me/584166520591" target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
     <a href="tel:04166520591" class="btn btn-call"><i class="fas fa-phone"></i> Llamar</a>
@@ -500,54 +482,51 @@
     <button class="btn btn-qr" onclick="abrirQR()"><i class="fas fa-qrcode"></i> Ver QR</button>
   </div>
 
-  <!-- CARRUSEL -->
   <h2 class="seccion-titulo" id="carrusel">✨ Productos Destacados ✨</h2>
   <div class="carrusel">
     <div class="carrusel-inner" id="carruselInner">
-      <div class="carrusel-slide"><img src="F1.jpg" alt="Producto 1"></div>
-      <div class="carrusel-slide"><img src="F2.jpg" alt="Producto 2"></div>
-      <div class="carrusel-slide"><img src="F3.jpg" alt="Producto 3"></div>
-      <div class="carrusel-slide"><img src="F4.jpg" alt="Producto 4"></div>
-      <div class="carrusel-slide"><img src="F5.jpg" alt="Producto 5"></div>
-      <div class="carrusel-slide"><img src="F6.jpg" alt="Producto 6"></div>
-      <div class="carrusel-slide"><img src="F7.jpg" alt="Producto 7"></div>
-      <div class="carrusel-slide"><img src="F8.jpg" alt="Producto 8"></div>
-      <div class="carrusel-slide"><img src="F9.jpg" alt="Producto 9"></div>
-      <div class="carrusel-slide"><img src="F10.jpg" alt="Producto 10"></div>
-      <div class="carrusel-slide"><img src="F11.jpg" alt="Producto 11"></div>
-      <div class="carrusel-slide"><img src="F12.jpg" alt="Producto 12"></div>
-      <div class="carrusel-slide"><img src="F13.jpg" alt="Producto 13"></div>
-      <div class="carrusel-slide"><img src="F14.jpg" alt="Producto 14"></div>
-      <div class="carrusel-slide"><img src="F15.jpg" alt="Producto 15"></div>
-      <div class="carrusel-slide"><img src="F16.jpg" alt="Producto 16"></div>
+      <div class="carrusel-slide"><img src="a1.jpg" alt="Producto 1"></div>
+      <div class="carrusel-slide"><img src="a2.jpg" alt="Producto 2"></div>
+      <div class="carrusel-slide"><img src="a3.jpg" alt="Producto 3"></div>
+      <div class="carrusel-slide"><img src="a4.jpg" alt="Producto 4"></div>
+      <div class="carrusel-slide"><img src="a5.jpg" alt="Producto 5"></div>
+      <div class="carrusel-slide"><img src="a6.jpg" alt="Producto 6"></div>
+      <div class="carrusel-slide"><img src="a7.jpg" alt="Producto 7"></div>
+      <div class="carrusel-slide"><img src="a8.jpg" alt="Producto 8"></div>
+      <div class="carrusel-slide"><img src="a9.jpg" alt="Producto 9"></div>
+      <div class="carrusel-slide"><img src="a10.jpg" alt="Producto 10"></div>
+      <div class="carrusel-slide"><img src="a11.jpg" alt="Producto 11"></div>
+      <div class="carrusel-slide"><img src="a12.jpg" alt="Producto 12"></div>
+      <div class="carrusel-slide"><img src="a13.jpg" alt="Producto 13"></div>
+      <div class="carrusel-slide"><img src="a14.jpg" alt="Producto 14"></div>
+      <div class="carrusel-slide"><img src="a15.jpg" alt="Producto 15"></div>
+      <div class="carrusel-slide"><img src="a16.jpg" alt="Producto 16"></div>
     </div>
     <button class="carrusel-btn prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
     <button class="carrusel-btn next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
     <div class="carrusel-indicators" id="indicadores"></div>
   </div>
 
-  <!-- CATÁLOGO -->
   <h2 class="seccion-titulo" id="catalogo">🛍️ Catálogo Completo</h2>
   <div class="catalogo-grid" id="catalogoGrid">
-    <div class="producto-card" onclick="consultar()"><img src="F1.jpg" alt="Producto 1"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F2.jpg" alt="Producto 2"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F3.jpg" alt="Producto 3"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F4.jpg" alt="Producto 4"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F5.jpg" alt="Producto 5"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F6.jpg" alt="Producto 6"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F7.jpg" alt="Producto 7"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F8.jpg" alt="Producto 8"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F9.jpg" alt="Producto 9"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F10.jpg" alt="Producto 10"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F11.jpg" alt="Producto 11"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F12.jpg" alt="Producto 12"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F13.jpg" alt="Producto 13"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F14.jpg" alt="Producto 14"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F15.jpg" alt="Producto 15"><div class="info"><div class="precio">Consultar precio</div></div></div>
-    <div class="producto-card" onclick="consultar()"><img src="F16.jpg" alt="Producto 16"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a1.jpg" alt="Producto 1"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a2.jpg" alt="Producto 2"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a3.jpg" alt="Producto 3"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a4.jpg" alt="Producto 4"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a5.jpg" alt="Producto 5"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a6.jpg" alt="Producto 6"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a7.jpg" alt="Producto 7"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a8.jpg" alt="Producto 8"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a9.jpg" alt="Producto 9"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a10.jpg" alt="Producto 10"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a11.jpg" alt="Producto 11"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a12.jpg" alt="Producto 12"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a13.jpg" alt="Producto 13"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a14.jpg" alt="Producto 14"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a15.jpg" alt="Producto 15"><div class="info"><div class="precio">Consultar precio</div></div></div>
+    <div class="producto-card" onclick="consultar()"><img src="a16.jpg" alt="Producto 16"><div class="info"><div class="precio">Consultar precio</div></div></div>
   </div>
 
-  <!-- QR -->
   <div class="qr-seccion" id="qr">
     <h3><i class="fas fa-qrcode"></i> Comparte mi Tarjeta</h3>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://tdi.guia-digital.com/julio-vargas" alt="QR Julio Vargas">
@@ -556,7 +535,6 @@
 
 </div>
 
-<!-- MODAL QR -->
 <div class="modal-qr" id="modalQR">
   <div class="contenido">
     <button class="cerrar" onclick="cerrarQR()"><i class="fas fa-times"></i></button>
@@ -566,7 +544,6 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="marca-footer">STYLE COLLECTION</div>
   <div class="slogan-footer">¡Que nada apague tu luz!</div>
@@ -577,7 +554,6 @@
 </footer>
 
 <script>
-// MENÚ
 const menuToggle = document.getElementById('menuToggle');
 const menuClose = document.getElementById('menuClose');
 const menuPanel = document.getElementById('menuPanel');
@@ -602,7 +578,6 @@ function irA(id) {
   menuOverlay.classList.remove('active');
 }
 
-// CARRUSEL
 const carruselInner = document.getElementById('carruselInner');
 const slides = document.querySelectorAll('.carrusel-slide');
 const totalSlides = slides.length;
@@ -629,7 +604,6 @@ document.getElementById('prevBtn').addEventListener('click', prevSlide);
 document.getElementById('nextBtn').addEventListener('click', nextSlide);
 setInterval(nextSlide, 5000);
 
-// COMPARTIR
 function compartir() {
   const texto = 'Mira mi catálogo STYLE COLLECTION · ¡Que nada apague tu luz!';
   const url = 'https://tdi.guia-digital.com/julio-vargas';
@@ -642,7 +616,6 @@ function compartir() {
   }
 }
 
-// QR MODAL
 function abrirQR() {
   document.getElementById('modalQR').classList.add('active');
 }
@@ -650,7 +623,6 @@ function cerrarQR() {
   document.getElementById('modalQR').classList.remove('active');
 }
 
-// CONSULTAR PRODUCTO
 function consultar() {
   const texto = 'Hola Julio, vi tu catálogo STYLE COLLECTION y me interesa un producto.';
   window.open(`https://wa.me/584166520591?text=${encodeURIComponent(texto)}`, '_blank');
