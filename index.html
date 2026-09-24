@@ -529,14 +529,16 @@
 
   <div class="qr-seccion" id="qr">
     <h3><i class="fas fa-qrcode"></i> Comparte mi Tarjeta</h3>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://tdi-julio-vargas.ngegestion.workers.dev/" alt="QR Julio Vargas">  </div>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://tdi-julio-vargas.ngegestion.workers.dev/" alt="QR Julio Vargas">
+    <p>Escanea para ver mi catálogo completo</p>
+  </div>
 
 </div>
 
 <div class="modal-qr" id="modalQR">
   <div class="contenido">
     <button class="cerrar" onclick="cerrarQR()"><i class="fas fa-times"></i></button>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://tdi.guia-digital.com/julio-vargas" alt="QR Julio Vargas">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://tdi-julio-vargas.ngegestion.workers.dev/" alt="QR Julio Vargas">
     <h3>Mi Tarjeta Digital</h3>
     <p>Escanea para ver mi catálogo</p>
   </div>
@@ -604,14 +606,44 @@ setInterval(nextSlide, 5000);
 
 function compartir() {
   const texto = 'Mira mi catálogo STYLE COLLECTION · ¡Que nada apague tu luz!';
-  const url = 'https://tdi.guia-digital.com/julio-vargas';
+  const url = 'https://tdi-julio-vargas.ngegestion.workers.dev/';
+  const mensaje = texto + '\n' + url;
+
   if (navigator.share) {
-    navigator.share({ title: 'STYLE COLLECTION · Julio Vargas', text: texto, url: url });
-  } else {
-    navigator.clipboard.writeText(texto + '\n' + url).then(() => {
-      alert('📋 Enlace copiado');
+    navigator.share({ title: 'STYLE COLLECTION · Julio Vargas', text: texto, url: url }).catch(() => {
+      copiarAlPortapapeles(mensaje);
     });
+  } else {
+    copiarAlPortapapeles(mensaje);
   }
+}
+
+function copiarAlPortapapeles(texto) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(() => {
+      alert('📋 Enlace copiado. ¡Compártelo!');
+    }).catch(() => {
+      copiaFallback(texto);
+    });
+  } else {
+    copiaFallback(texto);
+  }
+}
+
+function copiaFallback(texto) {
+  const area = document.createElement('textarea');
+  area.value = texto;
+  area.style.position = 'fixed';
+  area.style.opacity = '0';
+  document.body.appendChild(area);
+  area.select();
+  try {
+    document.execCommand('copy');
+    alert('📋 Enlace copiado. ¡Compártelo!');
+  } catch (e) {
+    alert('No se pudo copiar. Copia manualmente: ' + texto);
+  }
+  document.body.removeChild(area);
 }
 
 function abrirQR() {
