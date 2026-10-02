@@ -278,9 +278,8 @@
 </footer>
 
 <script>
-const SUPABASE_URL = 'https://yugbdqfzbpqobwoslfri.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_Zx5w0YmnEd9QGiLPkKtJrg_hjX-CGZx';
-const CODIGO_AFILIADO = 'EDI021';
+const API_URL = 'https://guia-digital-api.ngegestion.workers.dev/';
+const CODIGO_AFILIADO = 'EDI-021';
 const SLUG_JULIO = 'julio-vargas';
 
 // MENÚ
@@ -321,12 +320,7 @@ function cerrarFoto() { document.getElementById('modalFoto').classList.remove('a
 // CONTADOR VISITAS
 async function incrementarVisita() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/tarjetas?slug=eq.${SLUG_JULIO}&select=visitas`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
-    const data = await res.json();
-    if (data && data.length > 0) {
-      const nuevas = (data[0].visitas || 0) + 1;
-      await fetch(`${SUPABASE_URL}/rest/v1/tarjetas?slug=eq.${SLUG_JULIO}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ visitas: nuevas }) });
-    }
+    await fetch(API_URL + '?accion=sumar-visita&slug=' + SLUG_JULIO);
   } catch (err) { console.log('Error contador:', err); }
 }
 
@@ -339,11 +333,10 @@ function abrirOficina() {
 
 async function verificarOficina() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/oficinas?codigo=eq.${CODIGO_AFILIADO}&select=*`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
+    const res = await fetch(API_URL + '?accion=leer-oficina&codigo=' + encodeURIComponent(CODIGO_AFILIADO));
     const data = await res.json();
-    if (!data || data.length === 0 || !data[0].clave) {
+    const oficina = data.data;
+    if (!oficina || !oficina.clave) {
       document.getElementById('tituloClave').textContent = '🔐 Crear mi Clave';
       document.getElementById('textoClave').textContent = 'Elige una clave secreta. Solo tú la sabrás.';
       document.getElementById('btnClave').textContent = 'Guardar Clave';
@@ -365,11 +358,7 @@ async function procesarClave() {
 
   if (modo === 'crear') {
     try {
-      await fetch(`${SUPABASE_URL}/rest/v1/oficinas`, {
-        method: 'POST',
-        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ codigo: CODIGO_AFILIADO, clave: clave, nombre: 'Julio Vargas' })
-      });
+      await fetch(API_URL + '?accion=guardar-oficina&codigo=' + encodeURIComponent(CODIGO_AFILIADO) + '&clave=' + encodeURIComponent(clave) + '&nombre=' + encodeURIComponent('Julio Vargas'));
       document.getElementById('modalClave').classList.remove('active');
       document.getElementById('inputClave').value = '';
       document.getElementById('oficinaOverlay').classList.add('active');
@@ -377,11 +366,9 @@ async function procesarClave() {
     } catch (err) { alert('Error guardando clave'); }
   } else {
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/oficinas?codigo=eq.${CODIGO_AFILIADO}&clave=eq.${encodeURIComponent(clave)}&select=*`, {
-        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-      });
+      const res = await fetch(API_URL + '?accion=verificar-clave&codigo=' + encodeURIComponent(CODIGO_AFILIADO) + '&clave=' + encodeURIComponent(clave));
       const data = await res.json();
-      if (!data || data.length === 0) { alert('🔒 Clave incorrecta'); return; }
+      if (!data.valida) { alert('🔒 Clave incorrecta'); return; }
       document.getElementById('modalClave').classList.remove('active');
       document.getElementById('inputClave').value = '';
       document.getElementById('oficinaOverlay').classList.add('active');
@@ -399,26 +386,27 @@ function cerrarOficina() { document.getElementById('oficinaOverlay').classList.r
 
 async function cargarOficina() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/tarjetas?slug=eq.${SLUG_JULIO}&select=visitas`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+    const res = await fetch(API_URL + '?accion=buscar-tarjeta&slug=' + SLUG_JULIO);
     const data = await res.json();
-    document.getElementById('statVisitas').textContent = (data && data[0] && data[0].visitas) || 0;
+    document.getElementById('statVisitas').textContent = (data.data && data.data.visitas) || 0;
   } catch (err) { document.getElementById('statVisitas').textContent = '0'; }
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/tarjetas?ref=eq.${CODIGO_AFILIADO}&select=nombre,negocio,plan,precio`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+    const res = await fetch(API_URL + '?accion=listar-tarjetas&ref=' + encodeURIComponent(CODIGO_AFILIADO));
     const data = await res.json();
+    const lista = data.data || [];
     const tbody = document.getElementById('tablaReferidos');
-    if (!data || data.length === 0) {
+    if (lista.length === 0) {
       tbody.innerHTML = '<tr><td colspan="4" class="vacio">Aún no tienes referidos.</td></tr>';
       document.getElementById('statReferidos').textContent = '0';
       document.getElementById('statPagados').textContent = '0';
       document.getElementById('statGanancias').textContent = '$0';
       return;
     }
-    document.getElementById('statReferidos').textContent = data.length;
-    const pagados = data.filter(d => d.precio && Number(d.precio) > 0);
+    document.getElementById('statReferidos').textContent = lista.length;
+    const pagados = lista.filter(d => d.precio && Number(d.precio) > 0);
     document.getElementById('statPagados').textContent = pagados.length;
     let ganancias = 0;
-    data.forEach(d => {
+    lista.forEach(d => {
       if (!d.precio || Number(d.precio) <= 0) return;
       let porcentaje = 0.20;
       if (d.plan === 'Pro') porcentaje = 0.30;
@@ -427,7 +415,7 @@ async function cargarOficina() {
       ganancias += Number(d.precio) * porcentaje;
     });
     document.getElementById('statGanancias').textContent = '$' + Math.round(ganancias).toLocaleString('es-CO');
-    tbody.innerHTML = data.map(d => `<tr><td>${d.nombre || '—'}</td><td>${d.negocio || '—'}</td><td>${d.plan || '—'}</td><td class="${d.precio && Number(d.precio) > 0 ? 'pagado' : 'pendiente'}">${d.precio && Number(d.precio) > 0 ? '✅ Pagado' : '⏳ Pendiente'}</td></tr>`).join('');
+    tbody.innerHTML = lista.map(d => `<tr><td>${d.nombre || '—'}</td><td>${d.negocio || '—'}</td><td>${d.plan || '—'}</td><td class="${d.precio && Number(d.precio) > 0 ? 'pagado' : 'pendiente'}">${d.precio && Number(d.precio) > 0 ? '✅ Pagado' : '⏳ Pendiente'}</td></tr>`).join('');
   } catch (err) { document.getElementById('tablaReferidos').innerHTML = '<tr><td colspan="4" class="vacio">Error cargando referidos</td></tr>'; }
 }
 
